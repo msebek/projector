@@ -1,0 +1,59 @@
+/* =============================================================================
+   Default Styles
+   ========================================================================== */
+aside,
+div,
+section
+{
+	box-sizing: border-box;
+}
+
+body{
+	background-color: #111;
+	color: white;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.slides,
+.slide{
+	bottom: 0;
+	box-sizing: border-box;
+	left: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	right: 0;
+	top: 0;
+}
+.slides{
+	position: fixed;
+}
+.slide{
+	position: absolute;
+	-webkit-transition: all 1s ease-in-out;
+	opacity: 1;
+
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-origin: center center; 
+
+	text-align: center;
+	font-size: 36px;
+	padding: 250px 200px;
+
+}
+.slide[data-slide-state="hidden"]{
+	opacity: 0;
+	-webkit-transform: rotateY(100deg);
+}
+.slide[data-slide-state="previous"]{
+	opacity: 0;
+	-webkit-transform: rotateY(-180deg);
+}
+.slide[data-slide-state="current"]{
+	opacity: 1;
+	-webkit-transform: translateY(0);
+}
+
