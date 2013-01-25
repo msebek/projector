@@ -106,7 +106,7 @@ $(function() {
     var isApproved = function(str){ 
       return (approved_handles[str.toLowerCase()] == true);};
     _.map(tweets, function(tweet){
-      if (isApproved(tweet.user)){
+      if (isApproved(tweet.user) && tweet.text.charAt(0)!="@"){
         var message = "<h1>@"+tweet.user +"</h1><p>"+ tweet.text+"</p>";
         s.queue(message, "tweet warning message");
       }
