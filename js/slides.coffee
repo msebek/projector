@@ -1,9 +1,8 @@
 class @SlideSet
 
-  # Pass $('.slide') as $slides parameter
-  constructor: ($slides = []) ->
+  constructor: ->
 
-    @slides = $slides
+    @slides = $('.slide') 
     @slide_count = @slides.length
     @slides.attr('data-slide-state', 'hidden')
 
@@ -11,7 +10,12 @@ class @SlideSet
     @prev_slide = 0
     @jump(@current_slide)
 
-  queue: (slide) -> @slides.push(slide)
+  queue: (message, type='') -> 
+    new_slide = $('<div />',{html: message, class:'slide ' + type})
+    new_slide.attr('data-slide-state', 'hidden')
+    $('#slideSet').append(new_slide)
+    @slides = $('.slide')
+    @slide_count++
 
   next: -> @jump(@current_slide + 1)
   
@@ -29,7 +33,7 @@ class @SlideSet
 
     @transition_slides()
 
-  transition_slides: ->
+  transition_slides : ->
     $("[data-slide-state=previous]").attr('data-slide-state', 'hidden')
     @slides[@prev_slide].setAttribute('data-slide-state', 'previous')
     @slides[@current_slide].setAttribute('data-slide-state', 'current')

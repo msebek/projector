@@ -3,11 +3,8 @@
 
   this.SlideSet = (function() {
 
-    function SlideSet($slides) {
-      if ($slides == null) {
-        $slides = [];
-      }
-      this.slides = $slides;
+    function SlideSet() {
+      this.slides = $('.slide');
       this.slide_count = this.slides.length;
       this.slides.attr('data-slide-state', 'hidden');
       this.current_slide = 0;
@@ -15,8 +12,19 @@
       this.jump(this.current_slide);
     }
 
-    SlideSet.prototype.queue = function(slide) {
-      return this.slides.push(slide);
+    SlideSet.prototype.queue = function(message, type) {
+      var new_slide;
+      if (type == null) {
+        type = '';
+      }
+      new_slide = $('<div />', {
+        html: message,
+        "class": 'slide ' + type
+      });
+      new_slide.attr('data-slide-state', 'hidden');
+      $('#slideSet').append(new_slide);
+      this.slides = $('.slide');
+      return this.slide_count++;
     };
 
     SlideSet.prototype.next = function() {

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+
+  <!-- Meta Data -->
+  <title>Projector</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="css/reset.css"></head>
+  <link rel="stylesheet" type="text/css" href="css/projector.css"></head>
+
+  <!-- Javascript Frameworks + Libraries -->
+  <script src="js/libs/jquery.min.js"></script>
+  <script src="js/libs/underscore.min.js"></script>
+
+  <!-- Javascript Logic -->
+  <script src="js/slides.js"></script>
+  <script src="js/twitter_observer.js"></script>
+
+  <script type="text/javascript" src="//use.typekit.net/ixo3mdn.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <meta http-equiv="refresh" content="3600">
+
+</head>
+<body>
+
+<div class="slides" id="slideSet">
+  <div class="slide">
+    <img src="img/tartanhacks-word-logo-larger-white.png" style="width: 100%;"/>
+  </div>
+  <div class="schedule slide">
+    <h1> Friday Schedule</h1>
+    <ul>
+      <li><span class="time">5:45</span> Check In
+          <div class="location">GHC 4th Floor</div></li>
+      <li><span class="time">6pm</span> Dinner
+          <div class="location">GHC 6121</div></li>
+      <li><span class="time">12am</span> Midnight Snack
+          <div class="location">GHC 6121</div></li>
+    </ul>
+  </div>
+  <div class="schedule slide">
+    <h1> Saturday Schedule</h1>
+    <ul>
+      <li><span class="time">8am</span> Breakfast
+          <div class="location">GHC 6121</div></li>
+      <li><span class="time">12pm</span> Lunch + "How to Demo"
+          <div class="location">GHC 4, Rashid</div></li>
+      <li><span class="time">6pm</span> Hacking Ends + Dinner
+          <div class="location">GHC 4, Rashid</div></li>
+    </ul>
+  </div>
+  <div class="schedule slide">
+    <h1> Saturday Demo Schedule</h1>
+    <ul>
+      <li><span class="time">6:30</span> Demos Begin
+          <div class="location">GHC 4, Rashid</div></li>
+      <li><span class="time">8:30</span> Judging + Speaker
+          <div class="location">GHC 4, Rashid</div></li>
+      <li><span class="time">9pm</span> Awards Ceremony
+          <div class="location">GHC 4, Rashid</div></li>
+    </ul>
+  </div>
+  <!--
+  <div class="slide">
+    <img src="img/tartanhacks-word-logo-larger-white.png" style="width: 100%;"/>
+  </div>
+  <div class="message slide">
+    <h1>Snacks</h1>
+    <p>Snacks are available <br/>
+      <strong>near Rashid</strong> on Floor 4, and<br/>
+      by the <strong>Elevators on Floor 6.</strong></p>
+    <p>Don't go hungry!</p>
+  </div>
+  <div class="slide">
+    <img src="img/tartanhacks-word-logo-larger-white.png" style="width: 100%;"/>
+  </div>
+  <div class="message slide">
+    <h1>All Done?</h1>
+    <p>If you'd like to submit your project, head over to<br/>
+        <strong>submit.tartanhacks.com</strong></p>
+  </div>
+  <div class="slide">
+    <img src="img/tartanhacks-word-logo-larger-white.png" style="width: 100%;"/>
+  </div>
+  <div class="message slide">
+    <h1>Deadline</h1>
+    <p>We have a hard deadline of <br/><strong>6PM EST on January 26th</strong> for submissions.</p>
+    <p>No late submissions will be eligible for prizes.</p>
+  </div>
+-->
+</div>
+<script>
+
+$(function() {
+  var s = new SlideSet();
+  setInterval(function(){s.next();}, 7000);
+
+  function handleTweets(tweets){
+    var approved_handles = {
+      "tartanhacks":true, 
+      "scottylabs":true, 
+      "builtbyryhan":true};
+    
+    var isApproved = function(str){ 
+      return (approved_handles[str.toLowerCase()] == true);};
+    _.map(tweets, function(tweet){
+      if (isApproved(tweet.user)){
+        var message = "<h1>@"+tweet.user +"</h1><p>"+ tweet.text+"</p>";
+        s.queue(message, "tweet warning message");
+      }
+    });
+  };
+
+  var thObserver = new TwitterObserver("TartanHacks", handleTweets);
+  thObserver.watch(60000);
+});
+</script>
+
+</body>
+</html>

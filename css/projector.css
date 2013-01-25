@@ -11,9 +11,9 @@ section
 body{
 	background-color: #111;
 	color: white;
-	font-family: helvetica, arial, sans-serif;
+	font-family: proxima-nova-soft, helvetica, arial, sans-serif;
 	font-size: 12px;
-	font-weight: normal;
+	font-weight: regular;
 	margin: 0;
 }
 
@@ -33,7 +33,7 @@ body{
 }
 .slide{
 	position: absolute;
-	-webkit-transition: all 1s ease-in-out;
+	-webkit-transition: all 1s ease-out;
 	opacity: 1;
 
 	-webkit-backface-visibility: hidden;
@@ -46,14 +46,59 @@ body{
 }
 .slide[data-slide-state="hidden"]{
 	opacity: 0;
-	-webkit-transform: rotateY(100deg);
+	-webkit-transform: rotateY(100deg) rotateX(40deg) scale(0.75);
 }
 .slide[data-slide-state="previous"]{
 	opacity: 0;
-	-webkit-transform: rotateY(-180deg);
+	-webkit-transform: rotateY(-100deg) scale(0.75);
 }
 .slide[data-slide-state="current"]{
 	opacity: 1;
-	-webkit-transform: translateY(0);
+	-webkit-transform: translateY(0) scale(1.0);
 }
 
+.schedule.slide,
+.message.slide{
+	text-align: left;
+	padding: 80px 130px;
+	font-weight: normal;
+}
+
+p{
+	font-size: 30px;
+	line-height: 36px;
+	margin-bottom: 20px;
+	max-width: 400px;
+}
+
+li{
+	padding: 10px 0;
+	margin-bottom: 30px;
+	padding-left: 120px;
+	position: relative;
+}
+
+h1{
+	font-size: 24px;
+	margin-bottom: 30px;
+	opacity: 0.75;
+}
+.time{
+	display: inline-block;
+	position: absolute;
+	left: 0px;
+}
+.location{
+	margin-top: 10px;
+	font-size: 24px;
+	opacity: 0.5;
+}
+
+.slide.warning{
+	background-color: #FDAA2D;
+	color: #222;
+}
+
+strong{
+	color: #FEC465;
+}
