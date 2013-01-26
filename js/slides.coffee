@@ -1,9 +1,13 @@
 class @SlideSet
 
+  QUEUE_MAX_SIZE = 4
+  QUEUE_SIZE = 0
+
   constructor: ->
 
     @slides = $('.slide') 
     @slide_count = @slides.length
+    @slide_count_initial = @slides.length
     @slides.attr('data-slide-state', 'hidden')
 
     @current_slide = 0
@@ -16,6 +20,11 @@ class @SlideSet
     $('#slideSet').append(new_slide)
     @slides = $('.slide')
     @slide_count++
+
+    QUEUE_SIZE++
+    if QUEUE_SIZE > QUEUE_MAX_SIZE
+      @slides[@slide_count_initial].remove();
+      QUEUE_SIZE--
 
   next: -> @jump(@current_slide + 1)
   
